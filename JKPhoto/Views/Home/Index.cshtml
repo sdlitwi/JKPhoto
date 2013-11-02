@@ -1,0 +1,110 @@
+﻿<!--[if IE]>
+<style type="text/css">
+div#show3 table td, div#show4 table td {
+height:21px;
+}
+</style>
+<![endif]-->
+<script type="text/javascript">(function (d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=110603805686133";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+
+	//If using image buttons as controls, Set image buttons' image preload here true
+	//(use false for no preloading and for when using no image buttons as controls):
+	var preload_ctrl_images = true;
+
+	//And configure the image buttons' images here:
+	var previmg = 'Content/images/3.jpg';
+    var stopimg = '/Content/images/1.jpg';
+    var playimg = '/Content/images/2.jpg"';
+    var nextimg = 'Content/images/4.jpg';
+
+	var slides = []; //FIRST SLIDESHOW
+	//configure the below images and descriptions to your own. 
+	slides[0] = ["Content/images/3.jpg", "Photography by Julia Klarman"];
+	slides[1] = ["Content/images/1.jpg", "Photography by Julia Klarman"];
+	slides[2] = ["Content/images/2.jpg", "Photography by Julia Klarman"];
+	slides[3] = ["Content/images/4.jpg", "Photography by Julia Klarman"];
+
+	//optional properties for these images:
+	slides.desc_prefix = '<b>Description:<\/b> '; //string prefix for image descriptions display
+	slides.controls_top = 0; //use for top controls
+	slides.no_controls = 1 //use for no controls
+	slides.no_descriptions = 1 //use for no descriptions to be shown
+	slides.counter = 0; //use to show image count
+	slides.width = 525; //use to set width of widest image if dimensions vary
+	slides.height = 700; //use to set height of tallest image if dimensions vary
+	slides.no_auto = 0; //use to make show completely user operated (no play button, starts in stopped mode)
+	slides.use_alt = 0; //use for descriptions as images alt attributes
+	slides.use_title = 0; //use for descriptions as images title attributes
+	slides.nofade = 0; //use for no fade-in, fade-out effect for this show
+
+	//Notes:
+	//slides#.target will set a target for a slide group, will be overridden by slides#[#][3], if present
+	//slides#.specs will set new window specifications for a slide group, will be overridden by slides#[#][4], if present
+	//slides#.fadecolor will set fading images background color, defaults to white
+	//slides#.no_controls will set a slide show with no controls
+	//slides#.random will set a random slide sequence on each page load
+	//slides#.delay=3000 will set miliseconds delay between slides for a given show, may also be set in the call as the last parameter
+	//slides#.jumpto=1 will display added controls to jump to a particular image by its number
+	//slides#.no_added_linebreaks=1; use for no added line breaks in formatting of texts and controls
+
+	//use below to create a customized onclick event for linked images in a given show:
+	//slides#.onclick="window.open(this.href,this.target,'top=0, left=0, width='+screen.availWidth+', height='+screen.availHeight);return false;"
+
+</script>
+
+<script src="/Scripts/swissarmy.js") type="text/javascript">
+
+/***********************************************
+* Swiss Army Image slide show script  - © John Davenport Scheuer: http://home.comcast.net/~jscheuer1/
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full original source code
+***********************************************/
+
+</script>
+
+<!--[if lt IE 7]>
+		<script type="text/javascript" src="/Scripts/unitpngfix.js"></script>
+<![endif]-->
+ 
+<div id="fb-root"></div>
+<div id="wrapper">
+	<div id="header"><h1><a href="@Url.Action("Index","Home")"><img src="/Content/images/logo.png" alt="Julia Klarman Photography" width="360" height="30" /></a></h1>
+	</div><!-- end header -->
+	<div id="nav">
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<!--<li><a href="secondary.html">About</a></li>
+			<li><a href="secondary.html">Services</a></li>-->
+			<li><a href="portfolio.html">Portfolio</a></li>
+			<li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+		</ul>
+	</div>
+	<div id="content">
+		<div id="slideshow">
+			<div id="slideshow-inner">
+			<script type="text/javascript">
+			//Notes on Parameters: The only required parameter is the slides_array_name.  If Width is used, so must Height.
+			//Interval is optional too.  It is always last, either fourth after Width and Height or second after Slides_array_name.
+			//Usage: new inter_slide(Slides_array_name, Width, Height, Interval)
+			new inter_slide(slides)
+			</script>
+			</div><!-- end slideshow inner -->
+		</div><!-- end slideshow -->
+	<!--<div id="icons"><a href="#"><img src="images/flickr.png" alt="Flickr" width="32" height="32" /></a>
+					<a href="#"><img src="images/facebook.png" alt="Facebook" width="32" height="32" /></a>
+					<a href="#"><img src="images/twitter.png" alt="Twitter" width="32" height="32" /></a></div><!-- end icons -->
+	</div><!-- end content -->
+	<div id="footer">
+		<p class="left">&copy; @DateTime.Now.Year.ToString() Julia Klarman Photography, all rights reserved</p>
+		<div class="fb-like" data-href="http://juliaklarmanphotography.com/" data-send="false" data-width="450" data-show-faces="false" data-colorscheme="dark"></div>
+		<div class="clear"></div>
+	</div><!-- end footer -->
+
+</div><!-- end wrapper -->
