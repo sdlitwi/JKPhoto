@@ -1,0 +1,15 @@
+﻿@{
+	ViewBag.Title = "Portfolio | ";
+}
+
+	<div id="main">
+		<div class="spacer"></div>
+        @foreach (JKPhoto.Models.Album a in ViewData.Model)
+            {
+                <div class="columnp">
+                    <h3>@a.name</h3>
+                    <a href ="Album/?albumID=@a.id"><img src="~/Portfolio/@a.name.Trim()/cover.jpg" alt="@a.name" width="200" height="133"></a>
+                </div><!-- end column -->
+            }
+		<div class="spacer"></div>
+    </div><!-- end main -->

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JKPhoto", "JKPhoto\JKPhoto.csproj", "{56468F37-732E-40A3-BA79-1D0711BF2040}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JKPhoto.Tests", "JKPhoto.Tests\JKPhoto.Tests.csproj", "{5FD01BBB-9974-4C56-BC3E-E57FC75E4E12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{56468F37-732E-40A3-BA79-1D0711BF2040}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56468F37-732E-40A3-BA79-1D0711BF2040}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56468F37-732E-40A3-BA79-1D0711BF2040}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FD01BBB-9974-4C56-BC3E-E57FC75E4E12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5FD01BBB-9974-4C56-BC3E-E57FC75E4E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5FD01BBB-9974-4C56-BC3E-E57FC75E4E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5FD01BBB-9974-4C56-BC3E-E57FC75E4E12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
