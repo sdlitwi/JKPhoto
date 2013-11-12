@@ -7,7 +7,7 @@ using JKPhoto.Models;
 using System.Web.Hosting;
 using System.Drawing;
 
-namespace JKPhoto.Objects
+namespace JKPhoto.Workers
 {
     public class PortfolioWorker
     {

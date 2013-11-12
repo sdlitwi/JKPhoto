@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using JKPhoto.Objects;
+using JKPhoto.Workers;
 using JKPhoto.Models;
 
 namespace JKPhoto.Controllers
@@ -15,7 +15,6 @@ namespace JKPhoto.Controllers
 
         public ActionResult Index()
         {
-            PortfolioWorker.UpdateAlbums();
             return View();
         }
 
@@ -39,8 +38,12 @@ namespace JKPhoto.Controllers
             return null;
         }
 
-        public ActionResult Portfolio()
+        public ActionResult Portfolio(string updatephotos = "false")
         {
+            if (updatephotos.Equals("true"))
+            {
+                PortfolioWorker.UpdateAlbums();
+            }
             var jkdata = new JKPhotoDataContext();
 
             IEnumerable<JKPhoto.Models.Album> albums = from a in jkdata.Albums where a.deleted == false select a;

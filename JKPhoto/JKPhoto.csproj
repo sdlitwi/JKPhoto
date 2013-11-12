@@ -139,7 +139,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JKPhoto.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Objects\PortfolioWorker.cs" />
+    <Compile Include="Workers\PortfolioWorker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
