@@ -1,6 +1,6 @@
 This is a simple web application I developed for personal use, but there are many components that others may find useful, especially if they are just starting out with .Net,MVC,C#,or Javascript.
 
-Basic Usage:
+<b>Basic Usage:</b>
 
 JKPhoto expects a SQL database (using the included scripts) to store Portfolio metadata.
 
