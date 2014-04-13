@@ -7,16 +7,18 @@ using JKPhoto.Models;
 using System.Web.Hosting;
 using System.Drawing;
 
-namespace JKPhoto.Workers
+namespace JKPhoto.Models
 {
-    public class PortfolioWorker
+    public class PortfolioDataService
     {
+        private static string directoryName = "Content\\Portfolio";
+
         // check for new directories and add them to the Albums table. 
         public static void UpdateAlbums()
         {
             var data = new JKPhotoDataContext();
 
-            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Portfolio");
+            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, directoryName);
             var directories = Directory.GetDirectories(path);
 
             foreach (string dir in directories)
@@ -33,7 +35,7 @@ namespace JKPhoto.Workers
 
                     var name = char.ToUpper(dirName[0]) + dirName.Substring(1).ToLower();
                     albumToUpdate.name = name;
-
+                    albumToUpdate.isPublic = false;
                     data.Albums.InsertOnSubmit(albumToUpdate);
                     data.SubmitChanges();
 
@@ -56,7 +58,7 @@ namespace JKPhoto.Workers
         {
             var data = new JKPhotoDataContext();
 
-            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath + "Portfolio", dirName);
+            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath + directoryName, dirName);
 
             if (Directory.Exists(path))
             {
@@ -105,7 +107,7 @@ namespace JKPhoto.Workers
         {
             var data = new JKPhotoDataContext();
 
-            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath + "Portfolio", dirName);
+            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath + directoryName, dirName);
             var photos = Directory.GetFiles(path);
             var dirPhotos = new List<string>();
             var dbPhotos = from p in data.Photos where p.albumID == dirID select p;
@@ -131,7 +133,7 @@ namespace JKPhoto.Workers
         {
             var data = new JKPhotoDataContext();
 
-            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Portfolio");
+            var path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, directoryName);
             var directories = Directory.GetDirectories(path);
             var dirAlbums = new List<string>();
             var dbAlbums = data.Albums;

@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using JKPhoto.Workers;
 using JKPhoto.Models;
+using System.Web.Security;
 
 namespace JKPhoto.Controllers
 {
     public class HomeController : Controller
     {
+        private JKPhotoDataContext jkdata = new JKPhotoDataContext();
         //
         // GET: /Home/
+
+        public HomeController()
+        {
+            jkdata = new JKPhotoDataContext();
+        }
 
         public ActionResult Index()
         {
@@ -26,8 +32,6 @@ namespace JKPhoto.Controllers
         //returns an album of photos
         public ActionResult Album(int albumID = 0)
         {
-            var jkdata = new JKPhotoDataContext();
-
             var album = from a in jkdata.Albums where a.id == albumID && a.deleted==false select a;
 
             if(album.Count() > 0){
@@ -42,14 +46,27 @@ namespace JKPhoto.Controllers
         {
             if (updatephotos.Equals("true"))
             {
-                PortfolioWorker.UpdateAlbums();
+                PortfolioDataService.UpdateAlbums();
             }
-            var jkdata = new JKPhotoDataContext();
 
-            IEnumerable<JKPhoto.Models.Album> albums = from a in jkdata.Albums where a.deleted == false select a;
-
+            IEnumerable<JKPhoto.Models.Album> albums = from a in jkdata.Albums where a.deleted == false && a.isPublic == true select a;
             return View(albums);
 
+        }
+
+        [Authorize]
+        public ActionResult UserPortfolio()
+        {
+            var user = jkdata.Users.ToList().Find(u => u.userName == User.Identity.Name);
+
+            IEnumerable<JKPhoto.Models.Album> albums = 
+                from a in jkdata.Albums 
+                join ua in jkdata.UserAlbums 
+                on a.id equals ua.albumId 
+                where ua.userId == user.id  
+                && a.deleted == false select a;
+
+            return View("Portfolio",albums);
         }
     }
 }

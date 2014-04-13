@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JKPhoto" Class="JKPhotoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=GYPSY;Initial Catalog=JKPhoto;Integrated Security=True;Pooling=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="JKPhotoConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Album" Member="Albums">
-    <Type Name="Album">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Album_Photo" Member="Photos" ThisKey="id" OtherKey="albumID" Type="Photo" />
-    </Type>
-  </Table>
+  <Connection Mode="WebSettings" ConnectionString="Data Source=Gypsy;Initial Catalog=JKPhoto;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="JKPhotoConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Photo" Member="Photos">
     <Type Name="Photo">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -17,6 +9,35 @@
       <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Album_Photo" Member="Album" ThisKey="albumID" OtherKey="id" Type="Album" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserAlbum" Member="UserAlbums">
+    <Type Name="UserAlbum">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="albumId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="User1_UserAlbum" Member="User" ThisKey="userId" OtherKey="id" Type="User" IsForeignKey="true" />
+      <Association Name="Album_UserAlbum" Member="Album" ThisKey="albumId" OtherKey="id" Type="Album" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="userName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="datecreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="role" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="User1_UserAlbum" Member="UserAlbums" ThisKey="id" OtherKey="userId" Type="UserAlbum" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Album" Member="Albums">
+    <Type Name="Album">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isPublic" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Album_Photo" Member="Photos" ThisKey="id" OtherKey="albumID" Type="Photo" />
+      <Association Name="Album_UserAlbum" Member="UserAlbums" ThisKey="id" OtherKey="albumId" Type="UserAlbum" />
     </Type>
   </Table>
 </Database>
