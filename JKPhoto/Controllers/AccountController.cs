@@ -30,7 +30,7 @@ namespace JKPhoto.Controllers
                 ck.Path = FormsAuthentication.FormsCookiePath;
                 Response.Cookies.Add(ck);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UserPortfolio", "Home");
         }
 
         public ActionResult LogOut()

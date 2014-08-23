@@ -5,12 +5,14 @@
     #galleria {
         width: auto;
         height: 500px;
-        background: #000;
+        background: #000;     
     }
 </style>
 <script src="~/Scripts/galleria/galleria-1.3.5.min.js"></script>
 <script>
     Galleria.loadTheme('/Scripts/galleria/themes/classic/galleria.classic.min.js');
+    Galleria.configure({
+    });
     Galleria.run('#galleria');
 </script>
 <h2 style="text-align: center;">@ViewBag.Name &nbsp;</h2>

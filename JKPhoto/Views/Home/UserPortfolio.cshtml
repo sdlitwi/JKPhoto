@@ -1,0 +1,16 @@
+﻿@{
+	ViewBag.Title = "My Portfolio | ";
+}
+	<div id="main">
+        <div id ="gallery">
+        </div>
+		<div class="spacer"></div>
+        @foreach (JKPhoto.Models.Album a in Model)
+            {
+                <div class="columnp">
+                    <h3>@a.name</h3>
+                        <a href ="@Url.Action("UserAlbum","Home")/?albumID=@a.id"><img src="~/Content/Portfolio/@a.name.Trim()/1.jpg" alt="@a.name" width="300"></a>
+                </div><!-- end column -->
+            }
+		<div class="spacer"></div>
+    </div><!-- end main -->

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JKPhoto.Models;
 using System.Web.Security;
+using System.Text.RegularExpressions;
 
 namespace JKPhoto.Controllers
 {
@@ -42,13 +43,27 @@ namespace JKPhoto.Controllers
             return null;
         }
 
+        [Authorize]
+        public ActionResult UserAlbum(int albumID = 0)
+        {
+            var album = from a in jkdata.Albums where a.id == albumID && a.deleted == false select a;
+
+            if (album.Count() > 0)
+            {
+                ViewBag.Name = album.FirstOrDefault().name.Trim();
+                IEnumerable<JKPhoto.Models.Photo> photos = from p in jkdata.Photos where p.albumID == albumID && p.deleted == false select p;
+                return View(photos.ToList().OrderBy(p => ExtractNumber(p.fileName)));
+            }
+            return null;
+        }
+
+
         public ActionResult Portfolio(string updatephotos = "false")
         {
             if (updatephotos.Equals("true"))
             {
                 PortfolioDataService.UpdateAlbums();
             }
-
             IEnumerable<JKPhoto.Models.Album> albums = from a in jkdata.Albums where a.deleted == false && a.isPublic == true select a;
             return View(albums);
 
@@ -66,7 +81,26 @@ namespace JKPhoto.Controllers
                 where ua.userId == user.id  
                 && a.deleted == false select a;
 
-            return View("Portfolio",albums);
+            return View(albums.ToList().OrderBy(a => ExtractNumber(a.name)));
         }
+
+        static int ExtractNumber(string text)
+        {
+            Match match = Regex.Match(text, @"(\d+)");
+            if (match == null)
+            {
+                return 0;
+            }
+
+            int value;
+            if (!int.TryParse(match.Value, out value))
+            {
+                return 0;
+            }
+
+            return value;
+        }
+
+
     }
 }
