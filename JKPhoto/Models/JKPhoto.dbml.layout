@@ -2,23 +2,49 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="JKPhoto">
   <DataContextMoniker Name="/JKPhotoDataContext" />
   <nestedChildShapes>
-    <classShape Id="e01b349d-0fa4-4340-a387-8b747caceb8e" absoluteBounds="1.75, 2.5, 2, 1.3862939453125">
-      <DataClassMoniker Name="/JKPhotoDataContext/Album" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b9eead75-70c3-4f73-a958-e21dd91cc4c2" absoluteBounds="1.7649999999999997, 2.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="10972e30-9fd7-4f52-ac6e-c378af9b8171" absoluteBounds="5.625, 2.25, 2, 1.9631982421874996">
+    <classShape Id="10972e30-9fd7-4f52-ac6e-c378af9b8171" absoluteBounds="7.625, 1, 2, 1.9631982421874996">
       <DataClassMoniker Name="/JKPhotoDataContext/Photo" />
       <nestedChildShapes>
-        <elementListCompartment Id="aaa9b875-4f2b-4179-bc0a-876e654e607c" absoluteBounds="5.64, 2.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aaa9b875-4f2b-4179-bc0a-876e654e607c" absoluteBounds="7.64, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.75 : 3.19314697265625); (5.625 : 3.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="9bb017d1-4c1a-4c62-9829-ba9f1dcb8abe" absoluteBounds="2.875, 4.625, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/JKPhotoDataContext/UserAlbum" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ddf2386-c44c-4653-9891-6a2403d77655" absoluteBounds="2.8899999999999997, 5.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="096fb9f9-6daa-4bb3-a101-6121494d7b53" absoluteBounds="0.5, 1, 2, 1.9631982421875">
+      <DataClassMoniker Name="/JKPhotoDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8e95183c-0ef6-426d-8f23-e9dbb8c8c860" absoluteBounds="0.51500000000000057, 1.46, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.5 : 2.9631982421875); (1.5 : 5.22199625651042); (2.875 : 5.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JKPhotoDataContext/User/User1_UserAlbum" />
+      <nodes>
+        <classShapeMoniker Id="096fb9f9-6daa-4bb3-a101-6121494d7b53" />
+        <classShapeMoniker Id="9bb017d1-4c1a-4c62-9829-ba9f1dcb8abe" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b434dc69-6e9e-44dc-b996-3c524216e1f1" absoluteBounds="4.125, 1, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/JKPhotoDataContext/Album" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eb3fec01-fb6d-48e8-8a50-89ead4494a7f" absoluteBounds="4.14, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.125 : 1.78929768880208); (7.625 : 1.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JKPhotoDataContext/Album/Album_Photo" />
       <nodes>
-        <classShapeMoniker Id="e01b349d-0fa4-4340-a387-8b747caceb8e" />
+        <classShapeMoniker Id="b434dc69-6e9e-44dc-b996-3c524216e1f1" />
         <classShapeMoniker Id="10972e30-9fd7-4f52-ac6e-c378af9b8171" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 2.57859537760417); (4.5 : 4.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/JKPhotoDataContext/Album/Album_UserAlbum" />
+      <nodes>
+        <classShapeMoniker Id="b434dc69-6e9e-44dc-b996-3c524216e1f1" />
+        <classShapeMoniker Id="9bb017d1-4c1a-4c62-9829-ba9f1dcb8abe" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

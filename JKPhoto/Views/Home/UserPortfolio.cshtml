@@ -1,5 +1,5 @@
 ﻿@{
-	ViewBag.Title = "Portfolio | ";
+	ViewBag.Title = "My Portfolio | ";
 }
 	<div id="main">
         <div id ="gallery">
@@ -9,7 +9,7 @@
             {
                 <div class="columnp">
                     <h3>@a.name</h3>
-                        <a href ="@Url.Action("Album","Home")/?albumID=@a.id"><img src="~/Content/Portfolio/@a.name.Trim()/cover.jpg" alt="@a.name" width="200"></a>
+                        <a href ="@Url.Action("UserAlbum","Home")/?albumID=@a.id"><img src="~/Content/Portfolio/@a.name.Trim()/1.jpg" alt="@a.name" width="300"></a>
                 </div><!-- end column -->
             }
 		<div class="spacer"></div>

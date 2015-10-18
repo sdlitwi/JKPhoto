@@ -2,48 +2,98 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 	<link rel="icon" href="@Url.Content("~/favicon.ico")" type="image/x-icon" />
-	<title>@ViewBag.Title Julia Klarman Photography</title>
+	<title>@ViewBag.Title|Julia Klarman Photography</title>
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
-	@Scripts.Render("~/bundles/jquery")
-	@RenderSection("scripts", required: false)
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", required: false)
 </head>
 <body>
-	<!--[if IE]>
-<style type="text/css">
-div#show3 table td, div#show4 table td {
-height:21px;
-}
-</style>
-<![endif]-->
-
- 
-
-<div id="wrapper">
-	<div id="header"><h1><a href="@Url.Action("Index", "Home")"><img src="/Content/images/logo.png" alt="Julia Klarman Photography" width="360" height="30" /></a></h1>
-	</div><!-- end header -->
-	<div id="fb-root"></div>
-	<div id="nav">
-		<ul>
-			<li><a href="@Url.Action("Index", "Home")">Home</a></li>
-			<!--<li><a href="secondary.html">About</a></li>
-			<li><a href="secondary.html">Services</a></li>-->
-			<li><a href="@Url.Action("Portfolio", "Home")">Portfolio</a></li>
-			<li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
-		</ul>
+	<div class="brand">
+		<a href="@Url.Action("Index", "Home")"><img src="/Content/images/logo.png" alt="Julia Klarman Photography" width="360"/></a>
 	</div>
-	<div id="content">
-	@RenderBody()
-		</div><!-- end content -->
-	<div id="footer">
-		<p class="left">&copy;@DateTime.Now.Year Julia Klarman Photography, all rights reserved</p>
-		<p class="right">Julia Klarman Photography<br />
-						 Bloomington, IL</p>
-		<div class="clear"></div>
-	</div><!-- end footer -->	
-</div><!-- end wrapper -->
+	<div id="fb-root"></div>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header" style="background:#000;">
+                <a class="navbar-brand" style="color:#fff;" href="@Url.Action("Index", "Home")"><h5>Julia Klarman Photography</h5></a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="@Url.Action("Index", "Home")">Home</a>
+					</li>
+					<li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("UserPortfolio", "Home")">My Portfolio</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Portfolio", "Home")">Portfolio</a>
+                        }   
+					</li>
+					<li>
+                        <a href="@Url.Action("Contact", "Home")">About</a>
+					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" href="#" style="min-width:150px" data-toggle="dropdown">Account<strong class="caret"></strong></a>
+						<div class="dropdown-menu" style="padding: 14px; padding-bottom: 10px;">
+                            @if (User.Identity.IsAuthenticated)
+                            { 
+                                <div style="text-align:center">
+                                <h5 style="color:#000">Current User:<br /><br /><strong>@User.Identity.Name</strong> </h5>
+                                <a href="@Url.Action("Logout", "Account")"><input class="btn btn-primary btn-block" type="submit" id="sign-out"value="Sign Out"></a>
+                                </div>
+                            }
+                            else 
+                            {
+                                <form method="post" action="@Url.Action("Login", "Account")" accept-charset="UTF-8">
+								    <input style="margin-bottom: 15px; color:#000;" type="text" placeholder="Username" id="username" name="username">
+								    <input style="margin-bottom: 15px; color:#000;" type="password" placeholder="Password" id="password" name="password">
+								    <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In">
+							    </form>
+                            }
+
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
+	<div class="container">
+	<div class="row">
+		<div class="box">
+				<div class="col-lg-12 text-center">
+					@RenderBody()
+				</div>
+			</div>
+		</div>
+	</div>
+	   <footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center" style="color:#fff;">
+					&copy;@DateTime.Now.Year Julia Klarman Photography, all rights reserved
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>
 
