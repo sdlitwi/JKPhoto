@@ -10,25 +10,21 @@ namespace JKPhoto.Controllers
 {
     public class AccountController : Controller
     {
-        public JKPhotoDataContext jkdata;
-
-        public AccountController()
-        {
-            jkdata = new JKPhotoDataContext();
-        }
-
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var userList = jkdata.Users.ToList();
-            if (userList.Exists(u => u.userName == username && u.password == password))
+            using (var jkData = new JKPhotoDataContext())
             {
-                var tkt = new FormsAuthenticationTicket(username, true, 240);
-                var cookiestr = FormsAuthentication.Encrypt(tkt);
-                var ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-                ck.Expires = tkt.Expiration;
-                ck.Path = FormsAuthentication.FormsCookiePath;
-                Response.Cookies.Add(ck);
+                var userList = jkData.Users.Where(u => u.userName == username && u.password == password);
+                if (userList.Count() > 0)
+                {
+                    var tkt = new FormsAuthenticationTicket(username, true, 240);
+                    var cookiestr = FormsAuthentication.Encrypt(tkt);
+                    var ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
+                    ck.Expires = tkt.Expiration;
+                    ck.Path = FormsAuthentication.FormsCookiePath;
+                    Response.Cookies.Add(ck);
+                }
             }
             return RedirectToAction("UserPortfolio", "Home");
         }

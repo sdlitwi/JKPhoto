@@ -20,17 +20,20 @@ namespace JKPhoto.Controllers
             jkdata = new JKPhotoDataContext();
         }
 
+        [OutputCache(Duration = 10)]
         public ActionResult Index()
         {
             return View();
         }
 
+        [OutputCache(Duration = 10)]
         public ActionResult Contact()
         {
             return View();
         }
 
         //returns an album of photos
+        [OutputCache(Duration = 10, VaryByParam = "albumID")]
         public ActionResult Album(int albumID = 0)
         {
             var album = from a in jkdata.Albums where a.id == albumID && a.deleted==false select a;
@@ -44,6 +47,7 @@ namespace JKPhoto.Controllers
         }
 
         [Authorize]
+        [OutputCache(Duration = 10, VaryByParam = "albumID")]
         public ActionResult UserAlbum(int albumID = 0)
         {
             var album = from a in jkdata.Albums where a.id == albumID && a.deleted == false select a;
@@ -57,7 +61,7 @@ namespace JKPhoto.Controllers
             return null;
         }
 
-
+        [OutputCache(Duration = 10)]
         public ActionResult Portfolio(string updatephotos = "false")
         {
             if (updatephotos.Equals("true"))
@@ -70,6 +74,7 @@ namespace JKPhoto.Controllers
         }
 
         [Authorize]
+        [OutputCache(Duration = 10)]
         public ActionResult UserPortfolio()
         {
             var user = jkdata.Users.ToList().Find(u => u.userName == User.Identity.Name);
