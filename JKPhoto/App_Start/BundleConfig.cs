@@ -30,8 +30,7 @@ namespace JKPhoto
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap.css",
-                        "~/Content/business-casual.css",
-                        "~/Content/slick.css"
+                        "~/Content/business-casual.css"
                         ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
